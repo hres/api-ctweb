@@ -205,6 +205,11 @@
     <Compile Include="Areas\HelpPage\IModelDocumentationProvider.cs" />
     <Compile Include="Areas\HelpPage\ModelDescriptions.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\ProtocolController.cs" />
+    <Compile Include="Controllers\StudyPopulationController.cs" />
+    <Compile Include="Controllers\ProductBrandController.cs" />
+    <Compile Include="Controllers\MedicalConditionController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -212,7 +217,22 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\boolean.cs" />
+    <Compile Include="Models\IManufacturerRepository.cs" />
+    <Compile Include="Models\IProtocolRepository.cs" />
+    <Compile Include="Models\IStudyPopulationRepository.cs" />
+    <Compile Include="Models\IProductBrandRepository.cs" />
+    <Compile Include="Models\IMedicalConditionRepository.cs" />
+    <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Models\ProtocolRepository.cs" />
+    <Compile Include="Models\Protocol.cs" />
+    <Compile Include="Models\StudyPopulationRepository.cs" />
+    <Compile Include="Models\StudyPopulation.cs" />
+    <Compile Include="Models\ProductBrand.cs" />
+    <Compile Include="Models\MedicalCondition.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\ManufacturerRepository.cs" />
+    <Compile Include="Models\ProductBrandRepository.cs" />
+    <Compile Include="Models\MedicalConditionRepository.cs" />
     <Compile Include="Models\StatusRepository.cs" />
     <Compile Include="Models\DataEntity.cs" />
     <Compile Include="Models\IStatusRepository.cs" />

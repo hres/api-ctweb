@@ -114,9 +114,34 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>Manufacturer - English</td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/manufacturer/?lang=en&type=json">JSON</a></td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/manufacturer/?lang=en&type=xml">XML</a></td>
+                        </tr>
+                        <tr>
+                            <td>Medical Condition - English</td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/medicalcondition/?lang=en&type=json">JSON</a></td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/medicalcondition/?lang=en&type=xml">XML</a></td>
+                        </tr>
+                        <tr>
+                            <td>Product Brand - English</td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/productbrand/?lang=en&type=json">JSON</a></td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/productbrand/?lang=en&type=xml">XML</a></td>
+                        </tr>
+                        <tr>
+                            <td>Protocol - English</td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/protocol/?lang=en&type=json">JSON</a></td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/protocol/?lang=en&type=xml">XML</a></td>
+                        </tr>
+                        <tr>
                             <td>Status - English</td>
                             <td class="text-center"><a class="btn btn-default" href="./api/status/?lang=en&type=json">JSON</a></td>
                             <td class="text-center"><a class="btn btn-default" href="./api/status/?lang=en&type=xml">XML</a></td>
+                        </tr>
+                        <tr>
+                            <td>Study Population - English</td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/studypopulation/?lang=en&type=json">JSON</a></td>
+                            <td class="text-center"><a class="btn btn-default" href="./api/studypopulation/?lang=en&type=xml">XML</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -140,7 +165,7 @@
         var defPreFooter = document.getElementById("def-preFooter");
         defPreFooter.outerHTML = wet.builder.preFooter({
             cdnEnv: "prod",
-            dateModified: "2016-10-19",
+            dateModified: "2017-02-07",
             showPostContent: true,
             showShare: true,
         });
