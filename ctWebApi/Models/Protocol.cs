@@ -15,6 +15,8 @@ namespace ctWebApi.Models
         public DateTime? end_date { get; set; }
         public DateTime? nol_date { get; set; }
         public string protocol_title { get; set; }
-        //Note: In the table there are protocol_title_en & protocol_title_fr fields.
+        public IList<MedicalCondition> medConditionList { get; set; }
+        public IList<StudyPopulation> studyPopulationList { get; set; }
+
     }
 }

@@ -124,8 +124,9 @@ namespace clinical
             {
                 commandText += " MED_CONDITION_EN AS MED_CONDITION";
             }
+            
             commandText += " FROM CTA_OWNER.MEDICAL_CONDITION";
-
+           
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
@@ -353,6 +354,16 @@ namespace clinical
                                 item.nol_date       = dr["NOL_DATE"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dr["NOL_DATE"]);
                                 item.protocol_title = dr["CTA_PROTOCOL_TITLE"] == DBNull.Value ? string.Empty : dr["CTA_PROTOCOL_TITLE"].ToString().Trim();
 
+                                var medConditionList = GetAllMedicalConditionByProtocol(item.protocol_id);
+                                if (medConditionList != null && medConditionList.Count > 0)
+                                {
+                                    item.medConditionList = medConditionList;
+                                }
+                                var studyPopulationList = GetAllStudyPopulationByProtocol(item.protocol_id);
+                                if (studyPopulationList != null && studyPopulationList.Count > 0)
+                                {
+                                    item.studyPopulationList = studyPopulationList;
+                                }
                                 items.Add(item);
                             }
                         }
@@ -408,6 +419,18 @@ namespace clinical
                                 protocol.end_date       = dr["END_DATE"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dr["END_DATE"]);
                                 protocol.nol_date       = dr["NOL_DATE"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dr["NOL_DATE"]);
                                 protocol.protocol_title = dr["CTA_PROTOCOL_TITLE"] == DBNull.Value ? string.Empty : dr["CTA_PROTOCOL_TITLE"].ToString().Trim();
+
+                                var medConditionList = GetAllMedicalConditionByProtocol(protocol.protocol_id);
+                                if (medConditionList != null && medConditionList.Count > 0)
+                                {
+                                    protocol.medConditionList = medConditionList;
+                                }
+                                var studyPopulationList = GetAllStudyPopulationByProtocol(protocol.protocol_id);
+                                if (studyPopulationList != null && studyPopulationList.Count > 0)
+                                {
+                                    protocol.studyPopulationList = studyPopulationList;
+                                }
+                               // protocol.Add(protocol);
                             }
                         }
                     }
@@ -618,6 +641,221 @@ namespace clinical
             }
             return studypop;
         }//END - 6 Study Population 20170206
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // The function/method below this point are only used by the GetAllProtocol & GetProtocolById.
+        // They generate a list of Medical Condition(s) and Study Population(s).
+        // Date: 20170209
+        // Barry Martin
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //BEGIN - 7 MedicalConditionByProtocol 20170209
+        //          This function is called by GetAllProtocol to populate the list (collection list) of associated medical condition(s) to a particular Protocol.
+        public List<MedicalCondition> GetAllMedicalConditionByProtocol(int protocolId)
+        {
+            var items = new List<MedicalCondition>();
+            string commandText = "SELECT MC.MED_CONDITION_ID, ";
+            if (this.Lang.Equals("fr"))
+            {
+                commandText += " MED_CONDITION_FR AS MED_CONDITION";
+            }
+            else
+            {
+                commandText += " MED_CONDITION_EN AS MED_CONDITION";
+            }
+
+            commandText += " FROM CTA_OWNER.MEDICAL_CONDITION MC, CTA_OWNER.CTA_MED_CONDITION CMC";
+            commandText += " WHERE CMC.MED_CONDITION_ID = MC.MED_CONDITION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+            
+            using (OracleConnection con = new OracleConnection(CtDBConnection))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, con);
+                try
+                {
+                    con.Open();
+                    using (OracleDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                var item = new MedicalCondition();
+                                item.med_condition_id = dr["MED_CONDITION_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MED_CONDITION_ID"]);
+                                item.med_condition    = dr["MED_CONDITION"] == DBNull.Value ? string.Empty : dr["MED_CONDITION"].ToString().Trim();
+                                items.Add(item);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMessages = string.Format("DbConnection.cs - GetAllMedicalConditionByProtocol()");
+                    ExceptionHelper.LogException(ex, errorMessages);
+                }
+                finally
+                {
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+                }
+            }
+            return items;
+        }
+
+        // 20160209
+        // This function is called by GetProtocolById to populate the list (collection list) of associated medical condition(s) to a particular Protocol.
+        public MedicalCondition GetMedicalConditionByProtocol(int protocolId)
+        {
+            var medcondition = new MedicalCondition();
+
+            string commandText = "SELECT MC.MED_CONDITION_ID, ";
+            if (this.Lang.Equals("fr"))
+            {
+                commandText += " MED_CONDITION_FR AS MED_CONDITION";
+            }
+            else
+            {
+                commandText += " MED_CONDITION_EN AS MED_CONDITION";
+            }
+
+            commandText += " FROM CTA_OWNER.MEDICAL_CONDITION MC, CTA_OWNER.CTA_MED_CONDITION CMC";
+            commandText += " WHERE CMC.MED_CONDITION_ID = MC.MED_CONDITION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+
+            using (OracleConnection con = new OracleConnection(CtDBConnection))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, con);
+                try
+                {
+                    con.Open();
+                    using (OracleDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                medcondition.med_condition_id = dr["MED_CONDITION_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MED_CONDITION_ID"]);
+                                medcondition.med_condition    = dr["MED_CONDITION"] == DBNull.Value ? string.Empty : dr["MED_CONDITION"].ToString().Trim();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMessages = string.Format("DbConnection.cs - GetMedicalConditionByProtocol()");
+                    ExceptionHelper.LogException(ex, errorMessages);
+                }
+                finally
+                {
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+                }
+            }
+            return medcondition;
+        }
+
+        //END - 7 MedicalConditionByProtocol 20170209
+       
+        //BEGIN - 8 GetAllStudyPopulationByProtocol 20170209
+        //        This function is called by GetAllProtocol to populate the list (collection list) of associated study populaiton(s) to a particular Protocol.
+        public List<StudyPopulation> GetAllStudyPopulationByProtocol(int protocolId)
+        {
+            var items = new List<StudyPopulation>();
+            string commandText = "SELECT MC.STUDY_POPULATION_ID, ";
+            if (this.Lang.Equals("fr"))
+            {
+                commandText += " STUDY_POPULATION_FR AS STUDY_POPULATION";
+            }
+            else
+            {
+                commandText += " STUDY_POPULATION_EN AS STUDY_POPULATION";
+            }
+
+            commandText += " FROM CTA_OWNER.STUDY_POPULATION MC, CTA_OWNER.CTA_STUDY_POPULATION CMC";
+            commandText += " WHERE CMC.STUDY_POPULATION_ID = MC.STUDY_POPULATION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+
+            using (OracleConnection con = new OracleConnection(CtDBConnection))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, con);
+                try
+                {
+                    con.Open();
+                    using (OracleDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                var item = new StudyPopulation();
+                                item.study_population_id = dr["STUDY_POPULATION_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["STUDY_POPULATION_ID"]);
+                                item.study_population    = dr["STUDY_POPULATION"] == DBNull.Value ? string.Empty : dr["STUDY_POPULATION"].ToString().Trim();
+                                items.Add(item);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMessages = string.Format("DbConnection.cs - GetAllStudyPopulationByProtocol()");
+                    ExceptionHelper.LogException(ex, errorMessages);
+                }
+                finally
+                {
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+                }
+            }
+            return items;
+        }
+
+        // 20160209
+        // This function is called by GetProtocolById to populate the list (collection list) of associated medical condition(s) to a particular Protocol.
+        public StudyPopulation GetStudyPopulationByProtocol(int protocolId)
+        {
+            var studypop = new StudyPopulation();
+
+            string commandText = "SELECT MC.STUDY_POPULATION_ID, ";
+            if (this.Lang.Equals("fr"))
+            {
+                commandText += " STUDY_POPULATION_FR AS STUDY_POPULATION";
+            }
+            else
+            {
+                commandText += " STUDY_POPULATION_EN AS STUDY_POPULATION";
+            }
+
+            commandText += " FROM CTA_OWNER.MEDICAL_CONDITION MC, CTA_OWNER.CTA_STUDY_POPULATION CMC";
+            commandText += " WHERE CMC.STUDY_POPULATION_ID = MC.STUDY_POPULATION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+
+            using (OracleConnection con = new OracleConnection(CtDBConnection))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, con);
+                try
+                {
+                    con.Open();
+                    using (OracleDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                studypop.study_population_id = dr["STUDY_POPULATION_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["STUDY_POPULATION_ID"]);
+                                studypop.study_population    = dr["STUDY_POPULATION"] == DBNull.Value ? string.Empty : dr["STUDY_POPULATION"].ToString().Trim();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMessages = string.Format("DbConnection.cs - GetStudyPopulationByProtocol()");
+                    ExceptionHelper.LogException(ex, errorMessages);
+                }
+                finally
+                {
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+                }
+            }
+            return studypop;
+        }
 
     } //END of DBConnection class.
 
