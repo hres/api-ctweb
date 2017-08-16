@@ -13,7 +13,7 @@ using clinical;
 
 namespace ctWebApi.Controllers
 {
-    public class CSVController : GoC.WebTemplate.WebTemplateBaseController
+    public class CSVController : ApiController
     {
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         [System.Web.Http.HttpGet]
