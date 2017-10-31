@@ -200,7 +200,6 @@
     <Compile Include="App_Data\UtilityHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\IModelDocumentationProvider.cs" />
     <Compile Include="Areas\HelpPage\ModelDescriptions.cs" />
@@ -212,7 +211,6 @@
     <Compile Include="Controllers\ProductBrandController.cs" />
     <Compile Include="Controllers\MedicalConditionController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
