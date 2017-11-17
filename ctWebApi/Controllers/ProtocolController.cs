@@ -9,7 +9,7 @@ namespace ctWebApi.Controllers
     {
         static readonly IProtocolRepository databasePlaceholder = new ProtocolRepository();
 
-        public IEnumerable<Protocol> GetAllProtocol(string lang)
+        public IEnumerable<Protocol> GetAllProtocol(string lang = "en")
         {
 
             return databasePlaceholder.GetAll(lang);
@@ -18,7 +18,7 @@ namespace ctWebApi.Controllers
 
         public Protocol GetProtocolByID(int id, string lang)
         {
-            Protocol protocol = databasePlaceholder.Get(id, lang);
+            Protocol protocol = databasePlaceholder.Get(id, lang = "en");
             if (protocol == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ctWebApi.Models
 {
-    public class ProductBrand
+    public class DrugProduct
     {
         public int protocol_id { get; set; }
         public string submission_no { get; set; }

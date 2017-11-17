@@ -9,13 +9,13 @@ namespace ctWebApi.Controllers
     {
         static readonly IMedicalConditionRepository databasePlaceholder = new MedicalConditionRepository();
 
-        public IEnumerable<MedicalCondition> GetAllMedicalCondition(string lang)
+        public IEnumerable<MedicalCondition> GetAllMedicalCondition(string lang = "en")
         {
             return databasePlaceholder.GetAll(lang);
         }
 
 
-        public MedicalCondition GetMedicalConditionByID(int id, string lang)
+        public MedicalCondition GetMedicalConditionByID(int id, string lang = "en")
         {
             MedicalCondition medicalcondition = databasePlaceholder.Get(id, lang);
             if (medicalcondition == null)

@@ -9,7 +9,7 @@ namespace ctWebApi.Controllers
     {
         static readonly IStatusRepository databasePlaceholder = new StatusRepository();
 
-        public IEnumerable<Status> GetAllStatus(string lang)
+        public IEnumerable<Status> GetAllStatus(string lang = "en")
         {
 
             return databasePlaceholder.GetAll(lang);
@@ -18,7 +18,7 @@ namespace ctWebApi.Controllers
 
         public Status GetStatusByID(int id, string lang)
         {
-            Status status = databasePlaceholder.Get(id, lang);
+            Status status = databasePlaceholder.Get(id, lang = "en");
             if (status == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);

@@ -34,12 +34,12 @@ namespace ctWebApi.Controllers
 
             switch (dataType)
             {
-                case "manufacturer":
-                    var manufacturers = dbConnection.GetAllManufacturer().ToList();
+                case "sponsor":
+                    var sponsors = dbConnection.GetAllSponsor().ToList();
 
-                    if (manufacturers.Count > 0)
+                    if (sponsors.Count > 0)
                     {
-                        json = JsonConvert.SerializeObject(manufacturers);
+                        json = JsonConvert.SerializeObject(sponsors);
 
                     }
                     break;
@@ -55,7 +55,7 @@ namespace ctWebApi.Controllers
                     break;
 
                 case "brand":
-                    var brands = dbConnection.GetAllProductBrand().ToList();
+                    var brands = dbConnection.GetAllDrugProduct().ToList();
 
                     if (brands.Count > 0)
                     {

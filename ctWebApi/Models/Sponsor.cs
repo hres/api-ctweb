@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ctWebApi.Models
 {
-    public class Manufacturer
+    public class Sponsor
     {
         public int manufacturer_id { get; set; }
         public string manufacturer_name { get; set; }

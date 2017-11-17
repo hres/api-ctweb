@@ -9,14 +9,14 @@ namespace ctWebApi.Controllers
     {
         static readonly IStudyPopulationRepository databasePlaceholder = new StudyPopulationRepository();
 
-        public IEnumerable<StudyPopulation> GetAllStudyPopulation(string lang)
+        public IEnumerable<StudyPopulation> GetAllStudyPopulation(string lang = "en")
         {
             return databasePlaceholder.GetAll(lang);
         }
         
 
 
-        public StudyPopulation GetStudyPopulationByID(int id, string lang)
+        public StudyPopulation GetStudyPopulationByID(int id, string lang = "en")
         {
             StudyPopulation studypopulation = databasePlaceholder.Get(id, lang);
             if (studypopulation == null)

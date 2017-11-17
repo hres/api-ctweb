@@ -30,9 +30,9 @@ namespace clinical
         }
 
         //BEGIN - 1 Manufacturer 20170202
-        public List<Manufacturer> GetAllManufacturer()
+        public List<Sponsor> GetAllSponsor()
         {
-            var items = new List<Manufacturer>();
+            var items = new List<Sponsor>();
             string commandText = "SELECT MANUFACTURER_ID, MANUFACTURER_NAME";
 
             commandText += " FROM CTA_OWNER.MANUFACTURER";
@@ -49,7 +49,7 @@ namespace clinical
                         {
                             while (dr.Read())
                             {
-                                var item = new Manufacturer();
+                                var item = new Sponsor();
                                 item.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
                                 item.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
                                 items.Add(item);
@@ -59,7 +59,7 @@ namespace clinical
                 }
                 catch (Exception ex)
                 {
-                    string errorMessages = string.Format("DbConnection.cs - GetAllManufacturer()");
+                    string errorMessages = string.Format("DbConnection.cs - GetAllSponsor()");
                     ExceptionHelper.LogException(ex, errorMessages);
                 }
                 finally
@@ -70,9 +70,9 @@ namespace clinical
             }
             return items;
         }
-        public Manufacturer GetManufacturerById(int id)
+        public Sponsor GetSponsorById(int id)
         {
-            var manufacturer = new Manufacturer();
+            var sponsor = new Sponsor();
 
             string commandText = "SELECT * ";
 
@@ -90,15 +90,15 @@ namespace clinical
                         {
                             while (dr.Read())
                             {
-                                manufacturer.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
-                                manufacturer.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
+                                sponsor.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
+                                sponsor.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    string errorMessages = string.Format("DbConnection.cs - GetManufacturerById()");
+                    string errorMessages = string.Format("DbConnection.cs - GetSponsorById()");
                     ExceptionHelper.LogException(ex, errorMessages);
                 }
                 finally
@@ -108,8 +108,8 @@ namespace clinical
 
                 }
             }
-            return manufacturer;
-        }//END - 1 Manufacturer 20170202
+            return sponsor;
+        }//END - 1 Sponsor 20170202
 
         //BEGIN - 2 MedicalCondition 20170203
         public List<MedicalCondition> GetAllMedicalCondition()
@@ -208,9 +208,9 @@ namespace clinical
         }//END - 2 Medical Condition 20170203
 
         //BEGIN - 3 Product Brand 20170202
-        public List<ProductBrand> GetAllProductBrand()
+        public List<DrugProduct> GetAllDrugProduct()
         {
-            var items = new List<ProductBrand>();
+            var items = new List<DrugProduct>();
 
             string commandText = "SELECT A.CTA_PROTOCOL_ID, A.SUBMISSION_NO, A.BRAND_ID, A.MANUFACTURER_ID, C.MANUFACTURER_NAME, ";
             if (this.Lang.Equals("fr"))
@@ -236,7 +236,7 @@ namespace clinical
                         {
                             while (dr.Read())
                             {
-                                var item = new ProductBrand();
+                                var item = new DrugProduct();
                                 item.protocol_id       = dr["CTA_PROTOCOL_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CTA_PROTOCOL_ID"]);
                                 item.submission_no     = dr["SUBMISSION_NO"] == DBNull.Value ? string.Empty : dr["SUBMISSION_NO"].ToString().Trim();
                                 item.brand_id          = dr["BRAND_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BRAND_ID"]);
@@ -251,7 +251,7 @@ namespace clinical
                 }
                 catch (Exception ex)
                 {
-                    string errorMessages = string.Format("DbConnection.cs - GetAllProductBrand()");
+                    string errorMessages = string.Format("DbConnection.cs - GetAllDrugProduct()");
                     ExceptionHelper.LogException(ex, errorMessages);
                 }
                 finally
@@ -263,9 +263,9 @@ namespace clinical
             return items;
         }
 
-        public ProductBrand GetProductBrandById(int id)
+        public DrugProduct GetDrugProductById(int id)
         {
-            var productbrand = new ProductBrand();
+            var drugproduct = new DrugProduct();
 
             string commandText = "SELECT A.CTA_PROTOCOL_ID, A.SUBMISSION_NO, A.BRAND_ID, A.MANUFACTURER_ID, C.MANUFACTURER_NAME, ";
             if (this.Lang.Equals("fr"))
@@ -290,12 +290,12 @@ namespace clinical
                         {
                             while (dr.Read())
                             {
-                                productbrand.protocol_id       = dr["CTA_PROTOCOL_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CTA_PROTOCOL_ID"]);
-                                productbrand.submission_no     = dr["SUBMISSION_NO"] == DBNull.Value ? string.Empty : dr["SUBMISSION_NO"].ToString().Trim();
-                                productbrand.brand_id          = dr["BRAND_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BRAND_ID"]);
-                                productbrand.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
-                                productbrand.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
-                                productbrand.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
+                                drugproduct.protocol_id       = dr["CTA_PROTOCOL_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CTA_PROTOCOL_ID"]);
+                                drugproduct.submission_no     = dr["SUBMISSION_NO"] == DBNull.Value ? string.Empty : dr["SUBMISSION_NO"].ToString().Trim();
+                                drugproduct.brand_id          = dr["BRAND_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BRAND_ID"]);
+                                drugproduct.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
+                                drugproduct.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
+                                drugproduct.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
 
                             }
                         }
@@ -312,7 +312,7 @@ namespace clinical
                         con.Close();
                 }
             }
-            return productbrand;
+            return drugproduct;
         }//END - 3 Product Brand 20170205
 
         //BEGIN - 4 Protocol 20170207
