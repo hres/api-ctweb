@@ -16,9 +16,9 @@ namespace ctWebApi.Controllers
         }
         
 
-        public Protocol GetProtocolByID(int id, string lang)
+        public Protocol GetProtocolByID(int id, string lang = "en")
         {
-            Protocol protocol = databasePlaceholder.Get(id, lang = "en");
+            Protocol protocol = databasePlaceholder.Get(id, lang);
             if (protocol == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);

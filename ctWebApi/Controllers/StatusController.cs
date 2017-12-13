@@ -16,9 +16,9 @@ namespace ctWebApi.Controllers
         }
 
 
-        public Status GetStatusByID(int id, string lang)
+        public Status GetStatusByID(int id, string lang = "en")
         {
-            Status status = databasePlaceholder.Get(id, lang = "en");
+            Status status = databasePlaceholder.Get(id, lang );
             if (status == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
