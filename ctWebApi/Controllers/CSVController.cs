@@ -54,7 +54,7 @@ namespace ctWebApi.Controllers
                     }
                     break;
 
-                case "brand":
+                case "drugProduct":
                     var brands = dbConnection.GetAllDrugProduct().ToList();
 
                     if (brands.Count > 0)
@@ -97,7 +97,7 @@ namespace ctWebApi.Controllers
 
             if (!string.IsNullOrWhiteSpace(json))
             {
-                DataTable dt = JsonConvert.DeserializeObject<DataTable>(json);
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(json);                
                 if (dt.Rows.Count > 0)
                 {
                     using (MemoryStream stream = new MemoryStream())
