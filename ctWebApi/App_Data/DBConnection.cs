@@ -212,15 +212,15 @@ namespace clinical
         {
             var items = new List<DrugProduct>();
 
-            string commandText = "SELECT A.CTA_PROTOCOL_ID, A.SUBMISSION_NO, A.BRAND_ID, A.MANUFACTURER_ID, C.MANUFACTURER_NAME, ";
-            if (this.Lang.Equals("fr"))
-            {
-                commandText += " A.BRAND_NAME_FR AS BRAND_NAME ";
-            }
-            else
-            {
-                commandText += " A.BRAND_NAME_EN AS BRAND_NAME ";
-            }
+            string commandText = "SELECT A.CTA_PROTOCOL_ID, A.SUBMISSION_NO, A.BRAND_ID, A.MANUFACTURER_ID, C.MANUFACTURER_NAME, A.BRAND_NAME_FR BRAND_NAME_FR , A.BRAND_NAME_EN BRAND_NAME_EN ";
+            //if (this.Lang.Equals("fr"))
+            //{
+            //    commandText += " A.BRAND_NAME_FR AS BRAND_NAME ";
+            //}
+            //else
+            //{
+            //    commandText += " A.BRAND_NAME_EN AS BRAND_NAME ";
+            //}
             commandText += "FROM CTA_OWNER.PRODUCT_BRAND A, CTA_OWNER.MANUFACTURER C WHERE A.MANUFACTURER_ID = C.MANUFACTURER_ID(+)";
 
 
@@ -241,9 +241,16 @@ namespace clinical
                                 item.submission_no     = dr["SUBMISSION_NO"] == DBNull.Value ? string.Empty : dr["SUBMISSION_NO"].ToString().Trim();
                                 item.brand_id          = dr["BRAND_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BRAND_ID"]);
                                 item.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
-                                item.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
+                                //item.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
                                 item.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
-                                
+                                if (this.Lang.Equals("fr"))
+                                {
+                                    item.brand_name = dr["BRAND_NAME_FR"] == DBNull.Value ? dr["BRAND_NAME_EN"].ToString().Trim() : dr["BRAND_NAME_FR"].ToString().Trim();                                    
+                                }
+                                else
+                                {
+                                    item.brand_name = dr["BRAND_NAME_EN"] == DBNull.Value ? dr["BRAND_NAME_FR"].ToString().Trim() : dr["BRAND_NAME_EN"].ToString().Trim();
+                                }
                                 items.Add(item);
                             }
                         }
@@ -267,15 +274,15 @@ namespace clinical
         {
             var drugproduct = new DrugProduct();
 
-            string commandText = "SELECT A.CTA_PROTOCOL_ID, A.SUBMISSION_NO, A.BRAND_ID, A.MANUFACTURER_ID, C.MANUFACTURER_NAME, ";
-            if (this.Lang.Equals("fr"))
-            {
-                commandText += " A.BRAND_NAME_FR AS BRAND_NAME ";
-            }
-            else
-            {
-                commandText += " A.BRAND_NAME_EN AS BRAND_NAME ";
-            }
+            string commandText = "SELECT A.CTA_PROTOCOL_ID, A.SUBMISSION_NO, A.BRAND_ID, A.MANUFACTURER_ID, C.MANUFACTURER_NAME, A.BRAND_NAME_FR AS BRAND_NAME_FR, A.BRAND_NAME_EN AS BRAND_NAME_EN ";
+            //if (this.Lang.Equals("fr"))
+            //{
+            //    commandText += " A.BRAND_NAME_FR AS BRAND_NAME ";
+            //}
+            //else
+            //{
+            //    commandText += " A.BRAND_NAME_EN AS BRAND_NAME ";
+            //}
             commandText += "FROM CTA_OWNER.PRODUCT_BRAND A, CTA_OWNER.MANUFACTURER C WHERE A.MANUFACTURER_ID = C.MANUFACTURER_ID(+) AND A.BRAND_ID = " + id; 
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
@@ -294,9 +301,16 @@ namespace clinical
                                 drugproduct.submission_no     = dr["SUBMISSION_NO"] == DBNull.Value ? string.Empty : dr["SUBMISSION_NO"].ToString().Trim();
                                 drugproduct.brand_id          = dr["BRAND_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BRAND_ID"]);
                                 drugproduct.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
-                                drugproduct.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
+                                //drugproduct.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
                                 drugproduct.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
-
+                                if (this.Lang.Equals("fr"))
+                                {
+                                    drugproduct.brand_name = dr["BRAND_NAME_FR"] == DBNull.Value ? dr["BRAND_NAME_EN"].ToString().Trim() : dr["BRAND_NAME_FR"].ToString().Trim();
+                                }
+                                else
+                                {
+                                    drugproduct.brand_name = dr["BRAND_NAME_EN"] == DBNull.Value ? dr["BRAND_NAME_FR"].ToString().Trim() : dr["BRAND_NAME_EN"].ToString().Trim();
+                                }
                             }
                         }
                     }
