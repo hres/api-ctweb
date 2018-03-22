@@ -76,11 +76,12 @@ namespace clinical
 
             string commandText = "SELECT * ";
 
-            commandText += " FROM CTA_OWNER.MANUFACTURER WHERE MANUFACTURER_ID = " + id;
+            commandText += " FROM CTA_OWNER.MANUFACTURER WHERE MANUFACTURER_ID = :id ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -173,11 +174,12 @@ namespace clinical
             {
                 commandText += " MED_CONDITION_EN AS MED_CONDITION";
             }
-            commandText += " FROM CTA_OWNER.MEDICAL_CONDITION WHERE MED_CONDITION_ID = " + id;
+            commandText += " FROM CTA_OWNER.MEDICAL_CONDITION WHERE MED_CONDITION_ID = :id ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -283,11 +285,12 @@ namespace clinical
             //{
             //    commandText += " A.BRAND_NAME_EN AS BRAND_NAME ";
             //}
-            commandText += "FROM CTA_OWNER.PRODUCT_BRAND A, CTA_OWNER.MANUFACTURER C WHERE A.MANUFACTURER_ID = C.MANUFACTURER_ID(+) AND A.BRAND_ID = " + id; 
+            commandText += "FROM CTA_OWNER.PRODUCT_BRAND A, CTA_OWNER.MANUFACTURER C WHERE A.MANUFACTURER_ID = C.MANUFACTURER_ID(+) AND A.BRAND_ID = :id "; 
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -411,11 +414,13 @@ namespace clinical
             {
                 commandText += " CTA_PROTOCOL_TITLE_EN AS CTA_PROTOCOL_TITLE";
             }
-            commandText += "  FROM CTA_OWNER.CTA_PROTOCOL WHERE CTA_PROTOCOL_ID = " + id;
+            commandText += "  FROM CTA_OWNER.CTA_PROTOCOL WHERE CTA_PROTOCOL_ID = :id ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
+                
                 try
                 {
                     con.Open();
@@ -526,11 +531,13 @@ namespace clinical
             {
                 commandText += " CTA_STATUS_EN AS CTA_STATUS";
             }
-            commandText += " FROM CTA_OWNER.CTA_STATUS WHERE CTA_STATUS_ID = " + id;
+            commandText += " FROM CTA_OWNER.CTA_STATUS WHERE CTA_STATUS_ID = :id ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
+
                 try
                 {
                     con.Open();
@@ -622,11 +629,13 @@ namespace clinical
             {
                 commandText += " STUDY_POPULATION_EN AS STUDY_POPULATION";
             }
-            commandText += " FROM CTA_OWNER.STUDY_POPULATION WHERE STUDY_POPULATION_ID = " + id;
+            commandText += " FROM CTA_OWNER.STUDY_POPULATION WHERE STUDY_POPULATION_ID = :id ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
+
                 try
                 {
                     con.Open();
@@ -679,11 +688,12 @@ namespace clinical
             }
 
             commandText += " FROM CTA_OWNER.MEDICAL_CONDITION MC, CTA_OWNER.CTA_MED_CONDITION CMC";
-            commandText += " WHERE CMC.MED_CONDITION_ID = MC.MED_CONDITION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+            commandText += " WHERE CMC.MED_CONDITION_ID = MC.MED_CONDITION_ID AND CMC.CTA_PROTOCOL_ID = :protocolId ";
             
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":protocolId", protocolId);
                 try
                 {
                     con.Open();
@@ -732,11 +742,13 @@ namespace clinical
             }
 
             commandText += " FROM CTA_OWNER.MEDICAL_CONDITION MC, CTA_OWNER.CTA_MED_CONDITION CMC";
-            commandText += " WHERE CMC.MED_CONDITION_ID = MC.MED_CONDITION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+            commandText += " WHERE CMC.MED_CONDITION_ID = MC.MED_CONDITION_ID AND CMC.CTA_PROTOCOL_ID = :protocolId ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":protocolId", protocolId);
+
                 try
                 {
                     con.Open();
@@ -784,11 +796,12 @@ namespace clinical
             }
 
             commandText += " FROM CTA_OWNER.STUDY_POPULATION MC, CTA_OWNER.CTA_STUDY_POPULATION CMC";
-            commandText += " WHERE CMC.STUDY_POPULATION_ID = MC.STUDY_POPULATION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+            commandText += " WHERE CMC.STUDY_POPULATION_ID = MC.STUDY_POPULATION_ID AND CMC.CTA_PROTOCOL_ID = :protocolId ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":protocolId", protocolId);
                 try
                 {
                     con.Open();
@@ -837,11 +850,12 @@ namespace clinical
             }
 
             commandText += " FROM CTA_OWNER.MEDICAL_CONDITION MC, CTA_OWNER.CTA_STUDY_POPULATION CMC";
-            commandText += " WHERE CMC.STUDY_POPULATION_ID = MC.STUDY_POPULATION_ID AND CMC.CTA_PROTOCOL_ID = " + protocolId;
+            commandText += " WHERE CMC.STUDY_POPULATION_ID = MC.STUDY_POPULATION_ID AND CMC.CTA_PROTOCOL_ID = :protocolId ";
 
             using (OracleConnection con = new OracleConnection(CtDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":protocolId", protocolId);
                 try
                 {
                     con.Open();
