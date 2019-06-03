@@ -117,7 +117,7 @@ namespace clinical
         {
             var items = new List<MedicalCondition>();
             string commandText = "SELECT MED_CONDITION_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " MED_CONDITION_FR AS MED_CONDITION";
             }
@@ -166,7 +166,7 @@ namespace clinical
             var medcondition = new MedicalCondition();
 
             string commandText = "SELECT MED_CONDITION_ID,  ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " MED_CONDITION_FR AS MED_CONDITION";
             }
@@ -245,7 +245,7 @@ namespace clinical
                                 item.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
                                 //item.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
                                 item.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
-                                if (this.Lang.Equals("fr"))
+                                if (this.Lang != null && this.Lang.Equals("fr"))
                                 {
                                     item.brand_name = dr["BRAND_NAME_FR"] == DBNull.Value ? dr["BRAND_NAME_EN"].ToString().Trim() : dr["BRAND_NAME_FR"].ToString().Trim();                                    
                                 }
@@ -306,7 +306,7 @@ namespace clinical
                                 drugproduct.manufacturer_id   = dr["MANUFACTURER_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["MANUFACTURER_ID"]);
                                 //drugproduct.brand_name        = dr["BRAND_NAME"] == DBNull.Value ? string.Empty : dr["BRAND_NAME"].ToString().Trim();
                                 drugproduct.manufacturer_name = dr["MANUFACTURER_NAME"] == DBNull.Value ? string.Empty : dr["MANUFACTURER_NAME"].ToString().Trim();
-                                if (this.Lang.Equals("fr"))
+                                if (this.Lang != null && this.Lang.Equals("fr"))
                                 {
                                     drugproduct.brand_name = dr["BRAND_NAME_FR"] == DBNull.Value ? dr["BRAND_NAME_EN"].ToString().Trim() : dr["BRAND_NAME_FR"].ToString().Trim();
                                 }
@@ -338,7 +338,7 @@ namespace clinical
             var items = new List<Protocol>();
 
             string commandText = "SELECT CTA_PROTOCOL_ID, CTA_PROTOCOL_NO, SUBMISSION_NO, CTA_STATUS_ID, START_DATE, END_DATE, NOL_DATE, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " CTA_PROTOCOL_TITLE_FR AS CTA_PROTOCOL_TITLE";
             }
@@ -406,7 +406,7 @@ namespace clinical
 
             string commandText = "SELECT CTA_PROTOCOL_ID, CTA_PROTOCOL_NO, SUBMISSION_NO, CTA_STATUS_ID, START_DATE, END_DATE, NOL_DATE, ";
 
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " CTA_PROTOCOL_TITLE_FR AS CTA_PROTOCOL_TITLE";
             }
@@ -474,7 +474,7 @@ namespace clinical
         {
             var items = new List<Status>();
             string commandText = "SELECT CTA_STATUS_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " CTA_STATUS_FR AS CTA_STATUS";
             }
@@ -523,7 +523,7 @@ namespace clinical
             var status = new Status();
 
             string commandText = "SELECT CTA_STATUS_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " CTA_STATUS_FR AS CTA_STATUS";
             }
@@ -572,7 +572,7 @@ namespace clinical
         {
             var items = new List<StudyPopulation>();
             string commandText = "SELECT STUDY_POPULATION_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " STUDY_POPULATION_FR AS STUDY_POPULATION";
             }
@@ -621,7 +621,7 @@ namespace clinical
             var studypop = new StudyPopulation();
            
             string commandText = "SELECT STUDY_POPULATION_ID,  ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " STUDY_POPULATION_FR AS STUDY_POPULATION";
             }
@@ -678,7 +678,7 @@ namespace clinical
         {
             var items = new List<MedicalCondition>();
             string commandText = "SELECT MC.MED_CONDITION_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " MED_CONDITION_FR AS MED_CONDITION";
             }
@@ -732,7 +732,7 @@ namespace clinical
             var medcondition = new MedicalCondition();
 
             string commandText = "SELECT MC.MED_CONDITION_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " MED_CONDITION_FR AS MED_CONDITION";
             }
@@ -786,7 +786,7 @@ namespace clinical
         {
             var items = new List<StudyPopulation>();
             string commandText = "SELECT MC.STUDY_POPULATION_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " STUDY_POPULATION_FR AS STUDY_POPULATION";
             }
@@ -840,7 +840,7 @@ namespace clinical
             var studypop = new StudyPopulation();
 
             string commandText = "SELECT MC.STUDY_POPULATION_ID, ";
-            if (this.Lang.Equals("fr"))
+            if (this.Lang != null && this.Lang.Equals("fr"))
             {
                 commandText += " STUDY_POPULATION_FR AS STUDY_POPULATION";
             }
