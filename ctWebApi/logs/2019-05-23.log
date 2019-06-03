@@ -1,9 +1,0 @@
-2019-05-23 15:31:01.9812 - ERROR: DbConnection.cs - GetAllDrugProduct()
-EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
-   at clinical.DBConnection.GetAllDrugProduct() in C:\dev\api-ctweb\ctWebApi\App_Data\DBConnection.cs:line 248
-2019-05-23 19:13:19.6228 - ERROR: DbConnection.cs - GetAllDrugProduct()
-EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
-   at clinical.DBConnection.GetAllDrugProduct() in C:\dev\api-ctweb\ctWebApi\App_Data\DBConnection.cs:line 248
-2019-05-23 19:15:54.1627 - ERROR: DbConnection.cs - GetAllDrugProduct()
-EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
-   at clinical.DBConnection.GetAllDrugProduct() in C:\dev\api-ctweb\ctWebApi\App_Data\DBConnection.cs:line 248
